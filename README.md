@@ -12,13 +12,11 @@ A simple Dart program demonstrating:
 - `main.dart` — source code for the program.
 
 ## How to Run
-With Dart installed, open a terminal in this folder and run:
+How to Run Open https://dartpad.dev/
 
 ```bash
 dart run main.dart
 ```
-
-You can also paste the code into DartPad at https://dartpad.dev/ and run it there.
 
 ## Sample Output
 ```text
