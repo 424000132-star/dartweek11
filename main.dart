@@ -1,0 +1,60 @@
+class Employee {
+  String name;
+  int id;
+
+  Employee(this.name, this.id);
+
+  void describe() {
+    print('Employee #$id: $name');
+  }
+
+  Future<String> saveRecord() async {
+    print('  [saveRecord] Saving $name to the database...');
+    await Future.delayed(Duration(seconds: 2)); // simulated delay
+    return 'Record for $name (ID $id) saved successfully.';
+  }
+}
+
+class Manager extends Employee {
+  int teamSize;
+
+  Manager(String name, int id, this.teamSize) : super(name, id);
+
+  @override
+  void describe() {
+    super.describe();
+    print('  Manages a team of $teamSize');
+  }
+}
+
+class Developer extends Employee {
+  String language;
+
+  Developer(String name, int id, this.language) : super(name, id);
+
+  @override
+  void describe() {
+    super.describe();
+    print('  Writes $language');
+  }
+}
+
+Future<void> main() async {
+  var manager = Manager('Piollo', 101, 5);
+  var dev = Developer('Lexxine', 102, 'Dart');
+
+  manager.describe();
+  dev.describe();
+
+  print('\nStarting save for ${manager.name}...');
+  var future = manager.saveRecord();
+  print('This prints immediately, before the result is ready.');
+
+  var result = await future;
+  print('Result: $result');
+
+  print('\nStarting save for ${dev.name}...');
+  print('Result: ${await dev.saveRecord()}');
+
+  print('\nAll done.');
+}
